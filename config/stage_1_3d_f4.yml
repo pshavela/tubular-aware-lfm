@@ -1,0 +1,50 @@
+model:
+  learning_rate: 0.0001
+  learning_rate_generator_scale: 0.2
+  log_image_every_n_epochs: 5
+  spatial_dims: 3
+
+  vae_config:
+    in_channels: 1
+    out_channels: 1
+    num_channels: [64, 128]
+    num_res_layers: 2
+    num_res_channels: [64, 128]
+    num_embeddings: 8192
+    embedding_dim: 8
+
+  loss_config:
+    disriminator_step_start: 0
+    wasserstein_loss: False
+    adverserial_weight: 0.005
+    perceptual_weight: 0.001
+    spectral_weight: 1.0
+
+    discriminator_config:
+      in_channels: 1
+      num_layers_d: 2
+      num_channels: 32
+
+    perceptual_config:
+      network_type: "alex"
+
+data:
+  image_train_dir: "../data/256/cta/training"
+  image_val_dir: "../data/256/cta/validation"
+  augment: True
+  random_crop: [128, 128, 128]  # disabled after 100 epochs during finetuning
+  dataset_type: "persistent"
+  persistent_dir: "persistent_vae"
+  batch_size: 1
+  num_workers: 8
+  resolution: [256, 256, 128]
+  spacing: [0.7, 0.7, 1.05]
+
+callbacks:
+  gpustats:
+    on_val: False
+
+  modelcheckpoint:
+    save_top_k: -1
+    every_n_epochs: 5
+    save_last: True

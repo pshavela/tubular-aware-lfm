@@ -1,0 +1,16 @@
+gdown==5.2.0
+omegaconf==2.3.0
+lpips==0.1.4
+scipy==1.13
+einops==0.8.0
+matplotlib==3.9.2
+itk==5.4
+scikit-image==0.24.0
+nibabel==5.3.1
+tensorboard==2.18.0
+wandb[media]==0.19.2
+lightning==2.4.0
+pot==0.9.5
+torchode==1.0.0
+monai==1.4.0
+monai-generative @ git+https://github.com/Project-MONAI/GenerativeModels.git # support for non-quantized output in VQVAE encoder for stage 2 LDM

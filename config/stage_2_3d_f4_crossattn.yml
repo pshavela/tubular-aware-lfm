@@ -1,0 +1,72 @@
+model:
+  learning_rate: 1e-4
+  learning_rate_min: 0
+  lr_warmup_steps: 1000
+  sample_image_every_n_epochs: 50
+  spatial_dims: 3
+  latent_resolution: [64, 64, 32]
+  embedding_dim: 8
+  num_classes: 9
+  z_mean: 0.00767916
+  scaling_factor: 1.57657742
+  atol: 1e-4
+  rtol: 1e-2
+  spade_cond:
+    num_channels: [32, 64, 128]
+    zero_out: True
+
+  vessel_loss_weight: 10.0
+
+  model_config:
+    num_res_blocks: 1
+    num_channels: [128, 384, 576]
+    attention_levels: [False, True, True]
+    num_head_channels: [0, 384, 576]
+    use_flash_attention: True
+
+    dropout_cattn: 0.1
+    with_conditioning: True
+    cross_attention_dim: 577
+
+    positional_encoding_cattn: True
+    pe_bias_cattn: True
+
+data:
+  image_train_dir: "../data/256/cta/training"
+  image_val_dir: "../data/256/cta/validation"
+  label_train_dir: "../data/256/annotation/training"
+  label_val_dir: "../data/256/annotation/validation"
+  label_one_hot: True
+
+  split_label_detail: True
+  encode_detail_pos: True
+  encode_detail_pos_coords: True
+  encode_detail_pos_normalize: True
+  encode_detail_pos_emb_size: 576
+  split_label_vessel: True
+  dilate_vessel_iterations: 2
+  vessel_downsample: [64, 64, 32]
+
+  number_classes: 9
+  augment: False
+  encode_latents: "pre"
+  dataset_type: "persistent"
+  persistent_dir: "persistent_cattn"
+  batch_size: 1
+  num_workers: 0
+  resolution: [256, 256, 128]
+  spacing: [0.7, 0.7, 1.05]
+
+processing:
+  autoencode:
+    checkpoint: "lightning_logs/version_0/checkpoints/epoch=164-step=247500.ckpt"
+    normalize: False
+
+callbacks:
+  gpustats:
+    on_val: False
+
+  modelcheckpoint:
+    every_n_epochs: 100
+    save_top_k: -1
+    save_last: True
