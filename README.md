@@ -1,7 +1,7 @@
 # Tubular Anatomy-Aware 3D Semantically Conditioned Image Synthesis
 
 Code for the paper
-[Janluka Janelidze, Lukas Folle, Nassir Navab, and Mohammad Farid Azampour: Tubular Anatomy-Aware 3D Semantically Conditioned Image Synthesis, 2025](https://todo.com).
+[Janluka Janelidze, Lukas Folle, Nassir Navab, and Mohammad Farid Azampour: Tubular Anatomy-Aware 3D Semantically Conditioned Image Synthesis, 2025](https://doi.org/10.1007/978-3-032-05472-2_22).
 
 # Training
 It is recommended to run it on a single GPU, multi-GPU not tested yet.
